@@ -5,18 +5,26 @@ class cron1
 	{
 		while (true)
 		{
-
-		$offline_campaign_query=formQuery(where schedule_time=current_time);//forming query
-		$connector=new {Es or Mongo}Connector();// singleton
-		$result=$connect->fire{Es or Mongo}Query($offline_campaign_query);//result will have the campains info which have to be started
+		//forming query and time comparision will be hourly / minutes / seconds base??
+		$offline_campaign_query=formQuery(where schedule_time=current_time);
+		// singleton
+		$connector=new {Es or Mongo}Connector();
+		//result will have the campains info which have to be started
+		$result=$connect->fire{Es or Mongo}Query($offline_campaign_query);
 			while(count(result))
 			{
-				//for each campaign fork the child process
+			//for each campaign fork the child process
 			pcntl_fork();
-			$fetch_campaign_criteria_query=formQuery();//forming query
-			$connector=new {Es or Mongo}Connector();// singleton
-			$result=$connect->fire{Es or Mongo}Query($offline_campaign_query);//result 
-
+			//forming query
+			$fetch_campaign_criteria_query=formQuery(where campaign_metadata objectId= campaign_criteria_id);
+			//singleton
+			$connector=new {Es or Mongo}Connector();
+			//mark the respective campaign ACTIVE
+			$connect->updateQuery(mark campaigns active);
+			//result 
+			$result=$connector->fire{Es or Mongo}Query($fetch_campaign_criteria_query);
+			$scroll=new scrollAPI_Service()
+			$croll->scrollJob($result);
 			}
 		}
 	}

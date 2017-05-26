@@ -1,13 +1,17 @@
 <?php
 class ProfileService
 {
-	public function getprofileDetails()
+	public function __construct()
+	{
+
+	}
+	public function getprofileDetails($embelogin)
 	{
 		$es_query=formQuery();
 		$connector=new EsConnector();// singleton
 		// $fire=new QueryController();
-		$result=$connect->fireEsQuery($elastic_query);
-		return processResult($result);
+		$member_info=$connector->fireEsQuery($es_query);
+		return $member_info;
 
 	}
 	public function formQuery()
