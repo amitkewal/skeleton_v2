@@ -1,5 +1,5 @@
 <?php
-class cron1
+class OfflineCron
 {
 	run()
 	{
@@ -18,7 +18,7 @@ class cron1
 			//forming query
 			$fetch_campaign_criteria_query=formQuery(where campaign_metadata objectId= campaign_criteria_id);
 			//singleton
-			$connector=new {Es or Mongo}Connector();
+			// $connector=new {Es or Mongo}Connector();
 			//mark the respective campaign ACTIVE
 			$connect->updateQuery(mark campaigns active);
 			//result 
@@ -36,7 +36,7 @@ class cron1
 	}
 }
 
-$dummy=new cron1();
+$dummy=new OfflineCron();
 $dummy->run();
 
 ?>
