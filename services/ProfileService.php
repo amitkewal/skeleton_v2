@@ -5,7 +5,7 @@ class ProfileService
 	{
 
 	}
-	public function getprofileDetails($embelogin)
+	public function getprofileDetails($embelogin,$aggQueries)
 	{
 		$es_query=formQuery();
 		$connector=new EsConnector();// singleton
