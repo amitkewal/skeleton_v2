@@ -12,14 +12,21 @@ class OnlineCampaignService
 	{
 		# code...
 	}
-	public function getAllChannelPayload()
+	public function getAllAggregationESCampaignQueries()
 	{
 		$criteria_matching_query=formQuery($member_info);//forming query
 		$connector=new {Es/Mongo}Connector();// singleton
-		$result=$connector->fire{Es/Mongo}Query($criteria_matching_query);
-		$response=processResult($result);
+		$aggregate_query=$connector->fire{Es/Mongo}Query($criteria_matching_query);
+		return $aggregate_query;
+		
+	}
+	public function getCampaignInfo($member_agg_info)
+	{
+		//get the campaign info after processing		
+		$response=$this->processResult($member_agg_info);
 		return $response;
 	}
+	
 	public function formQuery($member_info)
 	{
 		//construct the query for fetching campaigns
