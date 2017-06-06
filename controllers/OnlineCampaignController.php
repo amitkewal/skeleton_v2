@@ -1,13 +1,15 @@
 <?php
 class OnlineCampaignController
 {
+	public $memberlogin;
+	public $channel;
 	public function __construct()
 	{
 
 	}
-	public function getEligibleCampaigns($membelogin,$channels)
+	public function getCampaignPayload($memberlogin,$channel)
 	{
-		$campaignsService= new OnlineCampaignService($membelogin,$channels);
+		$campaignService= new OnlineCampaignService($membelogin,$channel);
 		$aggQueries=$campaignsService->getAllAggregationESCampaignQueries();
 		
 		//For profile ES query with memberlogin and aggQueires
@@ -26,9 +28,12 @@ class OnlineCampaignController
 		}
 		*/
 		//get information for eligible campaign e.g. c1
-		$result = $campaignsService->getCampaignInfo($member_agg_info);
+		$campaign_result = $campaignService->getEligibleCampaign($member_agg_info);
+
+		$final_result=createPayload($campaign_result,$channel);
+
 		//post processing will done here
-		return $result;
+		return $final_result;
 	}
 	
 	

@@ -5,7 +5,7 @@ class ProfileService
 	{
 
 	}
-	public function getprofileDetails($embelogin,$aggQueries)
+	public function getprofileDetails($embelogin)
 	{
 		$es_query=formQuery();
 		$connector=new EsConnector();// singleton
@@ -14,7 +14,7 @@ class ProfileService
 		return $member_info;
 
 	}
-	public function formQuery()
+	private function formQuery()
 	{
 		//construct the elastic query
 		return $es_query;

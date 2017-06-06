@@ -6,42 +6,42 @@
 class OnlineCampaignService  
 {
 	private $member_info;
-	private $channels;
+	private $channel;
 
-	function __construct($member_info,$channels)
+	function __construct($member_info,$channel)
 	{
 		# code...
 	}
 	public function getAllAggregationESCampaignQueries()
 	{
-		$criteria_matching_query=formQuery($member_info);//forming query
+		$criteria_matching_query=formESQuery($member_info);//forming query
 		$connector=new {Es/Mongo}Connector();// singleton
 		$aggregate_query=$connector->fire{Es/Mongo}Query($criteria_matching_query);
 		return $aggregate_query;
 		
 	}
-	public function getCampaignInfo($member_agg_info)
+	public function getEligibleCampaign($member_agg_info)
 	{
 		//get the campaign info after processing		
 		$response=$this->processResult($member_agg_info);
 		return $response;
 	}
 	
-	public function formQuery($member_info)
+	private function formESQuery($member_info)
 	{
 		//construct the query for fetching campaigns
 		//AGGEGATION QUERY
 		return $es_query;
 	}
 	
-	public function processResult()
+	private function processESResult()
 	{
 		//based on precedence and category
 		//After this create payload
-		return createPayload();
+		return create<$channel>Payload();
 	}
 	
-	public function createPayload()
+	private function createPayload()
 	{
 		//replace placeholder
 		return $result;

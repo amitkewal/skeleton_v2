@@ -8,20 +8,20 @@ class CampaignService
 	}
 	public function addCampaigns()
 	{
-		$add->addData();
+		$$this->campaign->addData();
 
 	}
 	public function getCampaigns()
 	{
-		$add->fetchData();
+		$$this->campaign->fetchData();
 	}
 	public function updateCampaigns()
 	{
-		$add->updateData();
+		$$this->campaign->updateData();
 	}
 	public function deleteCampaigns()
 	{
-		$add->deleteData();
+		$$this->campaign->deleteData();
 	}
 
 }
